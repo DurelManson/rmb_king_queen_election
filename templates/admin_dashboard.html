@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Tableau de bord Administrateur</title>
+</head>
+<body>
+    <h1>Tableau de Bord Administrateur</h1>
+    <h2>Ajouter un Candidat</h2>
+    <form action="/admin/add_candidat" method="POST">
+        <label for="nom">Nom du Candidat:</label>
+        <input type="text" id="nom" name="nom" required><br><br>
+        <input type="submit" value="Ajouter">
+    </form>
+
+    <h2>Liste des Candidats</h2>
+    <ul>
+        {% for candidat in candidats %}
+        <li>
+            {{ candidat.nom }}
+            <form action="/admin/delete_candidat/{{ candidat.id }}" method="POST" style="display:inline;">
+                <button type="submit">Supprimer</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Liste des Utilisateurs</h2>
+    <ul>
+        {% for utilisateur in utilisateurs %}
+        <li>
+            {{ utilisateur.nom }} - {{ utilisateur.numero_telephone }}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <a href="/admin/logout">Deconnexion</a>
+</body>
+</html>

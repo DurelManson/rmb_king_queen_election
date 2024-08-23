@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>ARMB QUEEN AND KING</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+
+<body>
+    <div id="bloc_page">
+        <header>
+            <div id="titre_principal">
+                <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="logo du RMB" id="logo"/>
+                <h1>Royal Masked Bal</h1>
+                <h2>Queen And King Online Vote</h2>
+            </div>
+        </header>
+
+        <section>
+            <h1>Votez pour le Roi et la Reine du Bal 2024 !</h1>
+            <p>Découvrez nos magnifiques candidats pour le roi et la reine du Bal!</p>
+            <a href="{{ url_for('vote_queen') }}" id="reine">Reine du Bal</a>
+            <a href="{{ url_for('vote_king') }}" id="roi">Roi du Bal</a>
+            <h1 class="space">Etapes pour Voter:</h1>
+            <ul>
+                <li><em>Consultez les candidats</em>- Lisez les descriptions et regardez les photos.</li>
+                <li><em>Votez</em>- Selectionnez votre candidat prefere pour le Roi et/ou le Reine du Bal.</li>
+                <li><em>Confirmer</em>- Verifiez vos choix et confirmez votre vote en payant via OrangeMoney ou MobileMoney</li>
+            </ul>
+            <h1>Dates Importants</h1>
+            <ul>
+                <li><strong>Debut du vote: 14 aout 2024</strong></li>
+                <li><strong>Fin du vote: 23 aout 2024</strong></li>
+            </ul>
+        </section>
+
+        <footer>
+            <h1>Regles de vote:</h1>
+            <ul>
+                <li>C'est assez simple vous offrez des coeur au candidats que vous aimeriez voir Roi ou Reine du Bal.</li>  
+                <li>Chaque personne peut donner des coeurs une seul fois pour un/une Roi/Reine et ne peut pas en donnez a plusieurs.</li>
+                <li>Les votes sont anonymes et confidentiels.</li>
+            </ul>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Vote pour la Reine - Vote en Ligne</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/rmb_queen_king.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div id="bloc_page">
+        <header>
+            <div id="titre_principal">
+                <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="logo du RMB" id="logo"/>
+                <h1>Votez pour votre candidate préférée</h1>
+            </div>
+        </header>
+        <section>
+            <form action="/vote" method="POST" id="imageForm">
+                <label for="nom">Nom:</label>
+                <input type="text" id="nom" name="utilisateur_nom" required><br><br>
+
+                <label for="telephone">Numero de telephone:</label>
+                <input type="text" id="telephone" name="utilisateur_telephone" required><br><br>
+
+                <label for="image-select">Choisissez une candidate:</label>
+                <select id="image-select" name="candidat_nom" required>
+                    <!-- Liste des candidats pour le titre de Reine -->
+                    {% for queen in queens %}
+                        <option value="{{ queen.nom }}">{{ queen.nom }}</option>
+                    {% endfor %}
+                </select><br><br>
+
+                <input type="submit" value="❤ Voter">
+                
+                <button id="prev" class="nav-arrow">&lt;</button>
+                <button id="next" class="nav-arrow">&gt;</button>
+
+            </form>
+            
+            <div class="box-photo-candidat">
+                <div class="image-carousel" id="image-display">
+                    <!-- Images avec titres generes ici -->
+                    
+                </div>
+            </div>
+            
+        </section>
+    </div>
+
+    <script>
+
+        const imagesOptions = {
+            'Murielle': [
+                { src: '/static/img/Murielle_1.jpg', title: 'Murielle (Elegante)'},
+                { src: '/static/img/Murielle_2.jpg', title: 'Murielle (Belle)'},
+                { src: '/static/img/Murielle_3.jpg', title: 'Murielle (Jolie)'},
+            ],
+            'Adora': [
+                { src: '/static/img/Adora_1.jpg', title: 'Adora (Elegante)'},
+                { src: '/static/img/Adora_2.jpg', title: 'Adora (Belle)'},
+                { src: '/static/img/Adora_3.jpg', title: 'Adora (Jolie)'},
+            ],
+        };
+
+        let currentOption = null;
+        let currentIndex = 0;
+
+        function createIndicators() {
+                
+            // Creer les indicateurs
+            const imageDisplay = document.getElementById('image-display');
+            const indicatorsContainer = document.createElement('div');
+            indicatorsContainer.classList.add('indicators');
+
+            imagesOptions[currentOption].forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                }
+
+                // Ajouter un gestionnaire d'evenement pour cliquer sur les indicateurs
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateImageDisplay();
+                });
+
+                indicatorsContainer.appendChild(dot);
+            });
+
+            imageDisplay.appendChild(indicatorsContainer);
+        }
+
+        function updateIndicators() {
+            const dots = document.querySelectorAll('.indicators .dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        function updateImageDisplay() {
+            const imageDisplay = document.getElementById('image-display');
+            imageDisplay.innerHTML = '';
+
+            if (currentOption && imagesOptions[currentOption] && imagesOptions[currentOption][currentIndex]) {
+                const { src, title } = imagesOptions[currentOption][currentIndex];
+
+                const imgElement = document.createElement('img');
+                imgElement.src = src;
+                imgElement.alt = title;
+                imgElement.classList.add('active'); // Ajouter la classe active
+
+                const titleElement = document.createElement('h3');
+                titleElement.textContent = title;
+
+                imageDisplay.appendChild(titleElement);
+                imageDisplay.appendChild(imgElement);
+
+                // Attendre un petit delai pour permettre l'ajout a DOM avant d'appliquer l'animation
+                setTimeout(() => {
+                    imgElement.classList.add('active'); // Activer l'opacite de l'image apres un delai 
+                }, 10);
+
+                updateIndicators(); // Mettre a jour les indicateurs existants
+            }
+        }
+
+        document.getElementById('image-select').addEventListener('change', function() {
+            currentOption = this.value;
+            currentIndex = 0; // Reinitialiser l'index au debut
+
+            const imageDisplay = document.getElementById('image-display');
+            imageDisplay.innerHTML = ''; // Reinitialiser le contenu
+
+            createIndicators(); // Creer les indicateurs une seule fois lors de la selection de l'option
+            updateImageDisplay(); // Afficher la premiere image
+        });
+
+        document.getElementById('prev').addEventListener('click', function() {
+            event.preventDefault(); // Empeche la soumission du formulaire
+            if (currentOption) {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : imagesOptions[currentOption].length - 1;
+                updateImageDisplay();
+            }
+        });
+
+        document.getElementById('next').addEventListener('click', function() {
+            event.preventDefault(); // Empeche la soumission du formulaire
+            if (currentOption) {
+                currentIndex = (currentIndex < imagesOptions[currentOption].length - 1) ? currentIndex + 1 : 0;
+                updateImageDisplay();
+            }
+        });    
+    </script>
+</body>
+</html>

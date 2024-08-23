@@ -1,0 +1,263 @@
+/* style.css */
+
+/* Reset CSS pour assurer la coherence entre les navigateurs */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Style de basse */
+body {
+    background-color: #000; /* noir profonnd */
+    color: #FFD700; /* Or */
+    line-height: 1.6;
+    transition: background-color 0.5s ease; /* Transition de fond */
+}
+
+#logo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-shadow: 0px 2px 5px #FFCC33;
+    margin: auto;
+    margin-bottom: 100px;
+    margin-top: 50px;
+    display: block;
+}
+
+h1, h2 {
+    color: #FFD700; /* Or */
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInDown 0.8s forwards; /* Animation d'apparition */
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 1.8em;
+}
+
+label {
+    font-size: 1.2em;
+    color: #FFD700; /* Or */
+    transition: color 0.3s ease; /* Transition de couleur */
+}
+
+input[type="text"],
+input[type="password"],
+input[type="submit"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #FFD700;
+    border-radius: 5px;
+    background-color: #333; /* Gris fonce */
+    color: #FFD700;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, border-color 0.3 ease; /* Transition pour fond et bordure */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus {
+    background-color: #444; /* Gris legerement plus clair au focus */
+    border-color: #b8860b; /* Or fonce au focus */
+}
+
+input[type="submit"]:hover {
+    background-color: #b8860b; /* Or fonce au survol */
+    transform: scale(1.05); /* Agrandissement au survol */
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #222; /* NOir plus clair */
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 2px #FFD700;
+    opacity: 0;
+    animation: fadeInUp 1s forwards; /* Animation d'apparition par glissement */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: center;
+}
+
+ul li {
+    background-color: #222; /* Noir plus clair */
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    color: #FFD700; /* Or */
+    border-bottom: 1px solid #FFD700;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s forwards; /* Animation d'apparition par glissement */
+}
+
+ul li form {
+    display: inline;
+}
+
+button {
+    background-color: #FFD700;
+    color: #000;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transition pour fond et transformation */
+}
+
+button:hover {
+    background-color: #b8860b; /* Or fonce au survol */
+    transform: scale(1.05); /* Agrandissement au survol */
+}
+
+a {
+    color: #FFD700; /* Or */
+    text-decoration: none;
+    transition: color 0.3s ease; /* Transition de couleur */
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #b8860b; /*Or fonce au survol */
+}
+
+#resultats {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #111; /* Noir profond */
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 2px #FFD700;
+    opacity: 0;
+    animation: fadeInUp 1s forwards; /* Animation d'apparition par glissement */
+}
+
+#resultats li:last-child {
+    border-bottom: none;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Media Query pour les ecrans de 768px ou moins (tablettes et mobiles) */
+@media (max-width: 768px) {
+    body {
+        font-size: 0.9em; /* Reduire la taille de la police pour les ecrans */
+    }
+
+    h1 {
+        font-size: 2em; /* Ajuster la taille du titre principal */
+    }
+
+    h2 {
+        font-size: 1.5em; /* Ajuster la taille des sous-titres */
+    }
+
+    form {
+        padding: 15px; /* Reduire les marges et les padding */
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="submit"],
+    select {
+        font-size: 1em; /* Ajuster la taille de la police des champs de formulaire */
+    }
+
+    ul li {
+        padding: 8px; /* Reduire le padding pour les elements de la liste */
+        font-size: 0.9em;  /* Ajuster la taille de la police */
+    }
+
+    #resultats {
+        padding: 15px; /* Reduire le padding pour la section des resultats */
+    }
+
+    #resultats li {
+        padding: 8px; /* Reduire le padding pour les elements des resultats */
+    }
+}
+
+/* Media Query pour les ecrans de 480px ou moins (petits mobiles) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em; /* Ajuster encore plus la taille du titre principal */
+    }
+
+    h2 {
+        font-size: 1.3em; /* Ajuster encore plus la taille des sous-titres */
+    }
+
+    form {
+        padding: 10px; /* Reduire encore plus les marges et les padding */
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="submit"],
+    select {
+        font-size: 0.9em; /* Reduire la taille de la police des champs de formulaire */
+        padding: 8px; /* Reduire le padding des champs */
+    }
+
+    ul li {
+        padding: 6px; /* Reduire le padding pour les elements de la liste */
+        font-size: 0.8em;  /* Reduire la taille de la police */
+    }
+
+    #resultats {
+        padding: 10px; /* Reduire le padding pour la section des resultats */
+    }
+
+    #resultats li {
+        padding: 6px; /* Reduire le padding pour les elements des resultats */
+    }
+
+    button {
+        padding: 4px 8px; /* Reduire la taille des boutons */
+        font-size: 0.9em; /* Reduire la taille de la police des boutons */
+    }
+
+    label {
+        font-size: 1em; /* Ajuster la taille des labels */
+    }
+}

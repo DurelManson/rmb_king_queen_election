@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Resultats des Votes</title>
+    <style>
+        h1 {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Resultats des Votes</h1>
+    <ul id="resultats">
+        {% for candidat in candidats %}
+        <li>{{ candidat.nom }}: <span id="{{ candidat.nom }}">{{ candidat.nombre_de_votes }}</span> votes</li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        function updateResults() {
+            fetch('/api/results')
+                .then(response => response.json())
+                .then(data => {
+                    for (const candidat in data) {
+                        document.getElementById(candidat).innerText = data[candidat];
+                    }
+                });
+        }
+
+        // Met a jour les resultats toutes les 5 secondes
+        setInterval(updateResults, 5000);
+    </script>
+</body>
+</html>
